@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+guard :busted do
+  watch(%r{^spec/.*\.lua$})
+end
