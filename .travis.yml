@@ -1,7 +1,15 @@
----
 language: ruby
 cache: bundler
 rvm:
-  - 2.7.0
+- 2.7.0
 before_install: gem install bundler -v 2.1.4
 script: bundle exec rake spec
+deploy:
+  provider: rubygems
+  api_key:
+    secure: N5+OdW5an6esTqwSye1naDY2uvHea65K529mTfCUhB+fO8Vu5Iy8tvzf0BXzWsexlTmQzY8KIGpKkRIQJdkT6mQaygmVQO2Atu9GcE9LX1htOonzQ3nqzZavyGsj4EY7m/FafrJ2fQSFVcw/xMd1ODyUR7M98bqJE+UT+fREe1cjdfliaEJTsSWAb5+1vpzP2rQxyoIY0aLmkSavNdFoyCR6qxEunzt31wwsrozlNYAmoyDeHqXUycDAGI5eygB9FKdrSSWSsPvCItXy0xl/pLw9i81fKP5xZ/0aMvVNikgB+KbwY9rxmbSfIuSiNeVCT0rnHPFzgLmOmAtnPjeRAHi8xW50BuE/mxj8km2QbE0MdYekRDU/GiOibi2rFh3NAlKCuLEWLmJmL7iMjLshLumZSuz2EfxLIESA8c7s9jBWFygoOGXJAgJ9jN6AUkhNWz4geJz7Re+D4oLnsEmlnjRUJ+PtDQKsLWGQz+GjQBAeRwLfQW+TKsMesLL4P4gWVtI2urs8Dvvg2smSdOnnjuqGeZ8E2Njx2KNcfPsAcapqdklu3F0X2S70meibkwBLTmZ7sBUBomJSFiSocswYYcCb/V1u5k0EcyqJMUGJrUMJiF3HixJesbk9zroqHAcaWteEHVwTPBvz71Oc49UsVN6D+urfGIQfRjxlXBuzP7I=
+  gem: guard-busted
+  on:
+    tags: true
+    repo: pjezusek/guard-busted
+  skip_cleanup: 'true'
