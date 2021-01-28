@@ -24,7 +24,9 @@ This command initializes the Guard file.
 
 The provided guard template checks all files with `.lua` extension and starts the corresponding test file.
 It searches test files in `spec` directory with pattern `spec/<relative_path_to_file>/<file_name>_spec.lua`.
-For example if you have file in the project `some_dir/some_file.lua`, the guard-busted gem will starts `spec/some_dir/some_file_spec.lua`.
+
+EXAMPLE: you have file in the project `some_dir/some_file.lua`.
+After some change the guard-busted gem will try to perform tests located in: `spec/some_dir/some_file_spec.lua`.
 
 WARNING!: Keep in your mind that it treats `src` dir in the special way.
 It just does not include `src` in the mentioned pattern.
