@@ -1,4 +1,5 @@
 # Guard::Busted
+[![Build Status](https://travis-ci.com/pjezusek/guard-busted.svg?branch=master)](https://travis-ci.com/pjezusek/guard-busted)
 
 Guard for the unit testing framework named [busted](http://olivinelabs.com/busted/)
 
