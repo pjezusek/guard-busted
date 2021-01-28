@@ -7,8 +7,9 @@ require 'guard/busted/runner'
 require 'guard/busted/utils'
 
 module Guard
-  # Plugin for 'guard' which starts 'busted' (lua unit testing framework) if change is dtected.
+  # Plugin for 'guard' which starts 'busted' (lua unit testing framework) if a change is detected.
   class Busted < Plugin
+    include BustedUtils
     attr_reader :options, :runner
 
     # Initializes a Guard plugin.
@@ -38,12 +39,10 @@ module Guard
     private
 
     def check_if_busted_exist
-      return if Guard::BustedUtils.which('busted').nil?
+      return if which('busted').nil?
 
-      Compat::UI.warning(
-        'Busted not found. Use :cmd option or ' \
-        'install `busted` via `luarocks install busted --local`'
-      )
+      puts 'Busted not found. Use :cmd option or ' \
+           'install `busted` via `luarocks install busted --local`'
     end
   end
 end

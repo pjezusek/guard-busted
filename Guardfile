@@ -1,7 +1,5 @@
-# frozen_string_literal: true
-
-guard :rspec, cmd: 'bundle exec rspec', all_on_start: true do
-  require 'guard/rspec/dsl'
+guard :rspec, cmd: "bundle exec rspec" do
+  require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
 
   # RSpec files
