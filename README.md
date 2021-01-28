@@ -8,7 +8,7 @@ Guard for the unit testing framework named [busted](http://olivinelabs.com/buste
 First you need to install busted.
 
 ```bash
-luarocs install --local busted
+luarocks install --local busted
 ```
 
 Then install this gem using `gem install` command.
