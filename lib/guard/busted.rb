@@ -39,7 +39,7 @@ module Guard
     private
 
     def check_if_busted_exist
-      return if which('busted').nil?
+      return unless which('busted').nil?
 
       puts 'Busted not found. Use :cmd option or ' \
            'install `busted` via `luarocks install busted --local`'
