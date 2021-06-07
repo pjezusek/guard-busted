@@ -19,7 +19,7 @@ RSpec.describe Guard::BustedUtils do
     end
 
     context 'without existing executable' do
-      it 'finds path to the exe' do
+      it 'returns nil' do
         expect(instance.which('some_not_existing_entry')).to be nil
       end
     end
