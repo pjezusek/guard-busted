@@ -38,11 +38,11 @@ module Guard
     private
 
     def command
-      [options[:cmd], *options[:cmd_options]].join(' ')
+      [@cmd, *@cmd_options].join(' ')
     end
 
     def command_all
-      [options[:cmd_all], *options[:cmd_all_options]].join(' ')
+      [@cmd_all, *@cmd_all_options].join(' ')
     end
   end
 end
