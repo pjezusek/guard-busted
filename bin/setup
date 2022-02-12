@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+set -vx
+
+# Go to project root dir
+cd $(git rev-parse --show-toplevel 2>/dev/null)
+
+# Install development dependencies
+bundle install
+
+# Instal overcommit dependencies
+bundle install --gemfile=.overcommit_gems.rb
+
+# Install git hooks
+overcommit --install
+
+# Sign git hooks
+overcommit --sign

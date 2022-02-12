@@ -1,0 +1,69 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'thor'
+require 'tty-prompt'
+require 'pry'
+require_relative '../lib/guard/busted'
+
+$stdout.sync = true
+
+# path to the application root
+APP_ROOT = File.expand_path('../', __dir__)
+PROMPT = TTY::Prompt.new
+
+# Bunch of commands that are usefull during development
+class Dev < Thor
+  def self.exit_on_failure?
+    true
+  end
+
+  desc 'autofix', 'Run rubocop autofix'
+  def autofix
+    Dir.chdir APP_ROOT do
+      PROMPT.say 'Running autofix', color: :blue
+      system("rubocop -A #{APP_ROOT}", out: $stdout, err: :out)
+    end
+  end
+
+  desc 'console', 'Start console'
+  def console
+    Dir.chdir APP_ROOT do
+      Pry.start
+    end
+  end
+
+  desc 'guard', 'Start guard'
+  def guard
+    Dir.chdir APP_ROOT do
+      PROMPT.say 'Starting guard', color: :blue
+      system('bundle exec guard', out: $stdout, err: :out)
+    end
+  end
+
+  desc 'rubocop', 'Run rubocop'
+  def rubocop
+    Dir.chdir APP_ROOT do
+      PROMPT.say 'Running rubocop', color: :blue
+      system('rubocop', out: $stdout, err: :out)
+    end
+  end
+
+  desc 'rspec', 'Run rspec'
+  def rspec
+    Dir.chdir APP_ROOT do
+      PROMPT.say 'Starting rspec', color: :blue
+      system('rspec', out: $stdout, err: :out)
+    end
+  end
+
+  desc 'yard', 'Serve configuration via server'
+  def yard
+    Dir.chdir APP_ROOT do
+      PROMPT.say 'Starting yard server', color: :blue
+      system('yard server --reload', out: $stdout, err: :out)
+    end
+  end
+end
+
+Dev.start
