@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'guard/compat/plugin'
+require 'guard/plugin'
 
-require 'guard/busted/options'
-require 'guard/busted/runner'
-require 'guard/busted/utils'
+require_relative 'busted/options'
+require_relative 'busted/runner'
+require_relative 'busted/utils'
 
 module Guard
   # Plugin for 'guard' which starts 'busted' (lua unit testing framework) if a change is detected.
