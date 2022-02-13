@@ -28,6 +28,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'guard', '~> 2.18'
 
+  spec.add_development_dependency 'amazing_print', '~> 1.4'
   spec.add_development_dependency 'guard', '~> 2.16'
   spec.add_development_dependency 'guard-rspec'
   spec.add_development_dependency 'rake', '~> 12.0'
