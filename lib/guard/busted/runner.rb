@@ -12,18 +12,18 @@ module Guard
     # Initialize BustedRunner
     # It accepts following options:
     #   - cmd - command to perform for specific spec files,
-    #   - cmd_options - options for cmd command,
+    #   - cmd_options [Array<String>] - options for cmd command,
     #   - cmd_all - command to perform for all spec files
-    #   - cmd_all_options - options for cmd_all command.
+    #   - cmd_all_options [Array<String>] - options for cmd_all command.
     #
     # @param options [Hash<Symbol, String>] options for runner
     def initialize(options)
       super
 
       @cmd = options[:cmd]
-      @cmd_options = options[:cmd_options]
+      @cmd_options = Array(options[:cmd_options])
       @cmd_all = options[:cmd_all]
-      @cmd_all_options = options[:cmd_all_options]
+      @cmd_all_options = Array(options[:cmd_all_options])
     end
 
     # Run all tests in the project
@@ -31,7 +31,7 @@ module Guard
     # @raise [:task_has_failed] when run_all has failed
     def run_all
       UI.info 'Running all tests'
-      status, stdout = perform_command(command_all)
+      status, stdout = perform_command([@cmd_all] + @cmd_all_options)
       Guard::BustedNotifier.new(stdout, status).notify
       throw(:task_has_failed) unless status
     end
@@ -44,7 +44,7 @@ module Guard
     def run(paths)
       existing_paths = paths.select { |p| Pathname.new(p).exist? }
       UI.info "Running #{existing_paths.join(', ')}"
-      status, stdout = perform_command([command] + existing_paths)
+      status, stdout = perform_command([@cmd] + @cmd_options + existing_paths)
       Guard::BustedNotifier.new(stdout, status).notify
       throw(:task_has_failed) unless status
     end
@@ -59,7 +59,7 @@ module Guard
     def perform_command(cmd)
       message = ''
       status = 0
-      Open3.popen2e(cmd) do |_, stdout_and_stderr, wait_thr|
+      Open3.popen2e(*cmd) do |_, stdout_and_stderr, wait_thr|
         while (line = stdout_and_stderr.gets)
           message += line
           puts line
@@ -68,20 +68,6 @@ module Guard
       end
 
       [status, message]
-    end
-
-    # Return command with its options
-    #
-    # @return [String]
-    def command
-      [@cmd, *@cmd_options].join(' ')
-    end
-
-    # Return command for all tests with its options
-    #
-    # @return [String]
-    def command_all
-      [@cmd_all, *@cmd_all_options].join(' ')
     end
   end
 end

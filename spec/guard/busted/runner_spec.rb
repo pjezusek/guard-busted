@@ -11,9 +11,9 @@ RSpec.describe Guard::BustedRunner do
   let(:runner) do
     options = {
       cmd: 'some_command',
-      cmd_options: 'some_options',
+      cmd_options: ['--some_option_1', 'some_value_1', '--some_option_2'],
       cmd_all: 'some_command_all',
-      cmd_all_options: 'some_command_all_options'
+      cmd_all_options: ['--some_all_option_1', 'some_value_1', '--some_all_option_2']
     }
     Guard::BustedRunner.new(options)
   end
@@ -23,7 +23,12 @@ RSpec.describe Guard::BustedRunner do
       expect(
         [runner.cmd, runner.cmd_options, runner.cmd_all, runner.cmd_all_options]
       ).to eq(
-        %w[some_command some_options some_command_all some_command_all_options]
+        [
+          'some_command',
+          ['--some_option_1', 'some_value_1', '--some_option_2'],
+          'some_command_all',
+          ['--some_all_option_1', 'some_value_1', '--some_all_option_2']
+        ]
       )
     end
   end
@@ -44,27 +49,11 @@ RSpec.describe Guard::BustedRunner do
         allow(Open3).to receive(:popen2e)
       end
 
-      context 'when options are provided as a string' do
-        it 'runs a command for all tests' do
-          runner.run_all
-          expect(Open3).to have_received(:popen2e).with(
-            'some_command_all some_command_all_options'
-          )
-        end
-      end
-
-      context 'when options are provided as an array' do
-        before do
-          allow(Open3).to receive(:popen2e)
-          runner.cmd_all_options = ['--first_option', '--second_option']
-        end
-
-        it 'runs a command for all tests' do
-          runner.run_all
-          expect(Open3).to have_received(:popen2e).with(
-            'some_command_all --first_option --second_option'
-          )
-        end
+      it 'runs a command for all tests' do
+        runner.run_all
+        expect(Open3).to have_received(:popen2e).with(
+          'some_command_all', '--some_all_option_1', 'some_value_1', '--some_all_option_2'
+        )
       end
     end
   end
@@ -87,27 +76,11 @@ RSpec.describe Guard::BustedRunner do
         allow(Open3).to receive(:popen2e)
       end
 
-      context 'when options are provided as an array' do
-        it 'runs a test command for the given paths' do
-          runner.run [file_path, file_path]
-          expect(Open3).to have_received(:popen2e).with(
-            ['some_command some_options', file_path, file_path]
-          )
-        end
-      end
-
-      context 'when options are provided as an array' do
-        before do
-          allow(Open3).to receive(:popen2e)
-          runner.cmd_options = ['--first_option', '--second_option']
-        end
-
-        it 'runs a test command for the given paths' do
-          runner.run [file_path, file_path]
-          expect(Open3).to have_received(:popen2e).with(
-            ['some_command --first_option --second_option', file_path, file_path]
-          )
-        end
+      it 'runs a test command for the given paths' do
+        runner.run [file_path, file_path]
+        expect(Open3).to have_received(:popen2e).with(
+          'some_command', '--some_option_1', 'some_value_1', '--some_option_2', file_path, file_path
+        )
       end
     end
   end
