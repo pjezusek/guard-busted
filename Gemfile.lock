@@ -44,7 +44,7 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     rainbow (3.1.1)
-    rake (12.3.3)
+    rake (13.0.6)
     rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -74,6 +74,10 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.15.2)
       parser (>= 3.0.1.1)
+    rubocop-rake (0.6.0)
+      rubocop (~> 1.0)
+    rubocop-rspec (2.8.0)
+      rubocop (~> 1.19)
     ruby-progressbar (1.11.0)
     shellany (0.0.1)
     simplecov (0.21.2)
@@ -89,14 +93,16 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  amazing_print (~> 1.4)
-  guard (~> 2.16)
+  amazing_print
+  guard
   guard-busted!
   guard-rspec
-  rake (~> 12.0)
-  rspec (~> 3.0)
-  rubocop (~> 1.8)
-  simplecov (~> 0.21)
+  rake
+  rspec
+  rubocop
+  rubocop-rake
+  rubocop-rspec
+  simplecov
 
 BUNDLED WITH
    2.3.4
