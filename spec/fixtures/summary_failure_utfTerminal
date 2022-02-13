@@ -1,0 +1,7 @@
+[31m◼[0m
+[32m0[0m successes / [31m1[0m failure / [35m0[0m errors / [33m0[0m pending : [1m0.002434[0m seconds
+
+[31mFailure[0m → [36mspec/test_spec.lua[0m @ [36m3[0m
+[1mBusted unit testing framework should be awesome should be easy to use[0m
+spec/test_spec.lua:3: Expected to be falsy, but value was:
+(string) 'Yup.'
