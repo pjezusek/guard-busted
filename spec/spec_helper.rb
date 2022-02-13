@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-require 'guard/busted'
 require 'simplecov'
+require 'amazing_print'
+
+require 'guard/busted'
 
 SimpleCov.start
 
@@ -17,6 +19,9 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
+  # Filter specs using focus keyword
+  config.filter_run focus: true
+  config.run_all_when_everything_filtered = true
 end
 
 RSpec::Expectations.configuration.on_potential_false_positives = :nothing

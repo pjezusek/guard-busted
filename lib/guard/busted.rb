@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'guard/plugin'
+require 'guard/ui'
 
 require_relative 'busted/options'
 require_relative 'busted/runner'
@@ -41,8 +42,8 @@ module Guard
     def check_if_busted_exist
       return unless which('busted').nil?
 
-      puts 'Busted not found. Use :cmd option or ' \
-           'install `busted` via `luarocks install busted --local`'
+      UI.error 'Busted not found. Use :cmd option or ' \
+               'install `busted` via `luarocks install busted --local`'
     end
   end
 end
