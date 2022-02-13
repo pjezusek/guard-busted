@@ -60,12 +60,19 @@ RSpec.describe Guard::BustedRunner do
 
   describe '#run' do
     context 'when the system command ends with an error' do
+      it 'when ther is no test files to run' do
+        allow(runner).to receive(:perform_command).and_return([false, 'some_message'])
+        runner.run ['path']
+        expect(runner).not_to have_received(:perform_command)
+      end
+    end
+    context 'when the system command ends with an error' do
       before do
         allow(runner).to receive(:perform_command).and_return([false, 'some_message'])
       end
 
       it 'runs a test command for the given paths' do
-        expect { runner.run ['path'] }.to raise_error
+        expect { runner.run ['spec/fixtures/some_file'] }.to raise_error
       end
     end
 

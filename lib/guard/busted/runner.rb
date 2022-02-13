@@ -43,6 +43,9 @@ module Guard
     # @raise [:task_has_failed] when tests failed
     def run(paths)
       existing_paths = paths.select { |p| Pathname.new(p).exist? }
+
+      return if existing_paths.empty?
+
       UI.info "Running #{existing_paths.join(', ')}"
       status, stdout = perform_command([@cmd] + @cmd_options + existing_paths)
       Guard::BustedNotifier.new(stdout, status).notify
