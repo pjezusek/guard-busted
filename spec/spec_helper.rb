@@ -2,11 +2,37 @@
 
 require 'bundler/setup'
 require 'simplecov'
+require 'simplecov-cobertura'
 require 'amazing_print'
 
-require 'guard/busted'
+SimpleCov.start do
+  enable_coverage :branch
+  primary_coverage :branch
 
-SimpleCov.start
+  track_files '**/*.rb'
+
+  add_filter %r{^/spec/}
+
+  add_group 'Gem files', 'lib'
+
+  if ENV['CI']
+    formatter SimpleCov::Formatter::MultiFormatter.new(
+      [
+        SimpleCov::Formatter::HTMLFormatter,
+        SimpleCov::Formatter::CoberturaFormatter
+      ]
+    )
+  else
+    formatter SimpleCov::Formatter::MultiFormatter.new(
+      [
+        SimpleCov::Formatter::SimpleFormatter,
+        SimpleCov::Formatter::HTMLFormatter
+      ]
+    )
+  end
+end
+
+require 'guard/busted'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
