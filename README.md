@@ -2,6 +2,7 @@
 
 [![Rubocop](https://github.com/pjezusek/guard-busted/actions/workflows/rubocop.yml/badge.svg)](https://github.com/pjezusek/guard-busted/actions/workflows/rubocop.yml)
 [![RSpec](https://github.com/pjezusek/guard-busted/actions/workflows/rspec.yml/badge.svg)](https://github.com/pjezusek/guard-busted/actions/workflows/rspec.yml)
+[![codecov](https://codecov.io/gh/pjezusek/guard-busted/branch/master/graph/badge.svg?token=OZYC63B26Y)](https://codecov.io/gh/pjezusek/guard-busted)
 [![Gem Version](https://badge.fury.io/rb/guard-busted.svg)](https://rubygems.org/gems/guard-busted)
 
 Guard for the unit testing framework named [busted](http://olivinelabs.com/busted/)
