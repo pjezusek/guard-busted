@@ -1,6 +1,8 @@
 # Guard::Busted
-[![Build Status](https://travis-ci.com/pjezusek/guard-busted.svg?branch=master)](https://travis-ci.com/pjezusek/guard-busted)
-[![Gem Version](https://badge.fury.io/rb/guard-busted.svg)](https://badge.fury.io/rb/guard-busted)
+
+[![Rubocop](https://github.com/pjezusek/guard-busted/actions/workflows/rubocop.yml/badge.svg)](https://github.com/pjezusek/guard-busted/actions/workflows/rubocop.yml)
+[![RSpec](https://github.com/pjezusek/guard-busted/actions/workflows/rspec.yml/badge.svg)](https://github.com/pjezusek/guard-busted/actions/workflows/rspec.yml)
+[![Gem Version](https://badge.fury.io/rb/guard-busted.svg)](https://rubygems.org/gems/guard-busted)
 
 Guard for the unit testing framework named [busted](http://olivinelabs.com/busted/)
 
@@ -26,12 +28,15 @@ This command initializes the Guard file.
 The provided guard template checks all files with `.lua` extension and starts the corresponding test file.
 It searches test files in `spec` directory with the pattern `spec/<relative_path_to_file>/<file_name>_spec.lua`.
 
-EXAMPLE: lets assume that you have a file in the project `some_dir/some_file.lua`.
+_EXAMPLE:_<br />
+There is some file in the project `some_dir/some_file.lua`.
 After some change on this file the guard-busted gem will try to perform tests located in: `spec/some_dir/some_file_spec.lua`.
 
-WARNING!: Keep in your mind that it treats `src` dir in the special way.
+_WARNING!:_<br />
+Keep in your mind that it treats `src` dir in the special way.
 It just does not include `src` in the mentioned pattern.
 
+The gem also supports desktop notifications.
 
 ## Contributing
 
