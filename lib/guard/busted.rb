@@ -40,7 +40,10 @@ module Guard
     private
 
     def check_if_busted_exist
+      # :nocov:
       return unless which('busted').nil?
+
+      # :nocov:
 
       UI.error 'Busted not found. Use :cmd option or ' \
                'install `busted` via `luarocks install busted --local`'

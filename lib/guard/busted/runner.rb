@@ -63,11 +63,13 @@ module Guard
       message = ''
       status = 0
       Open3.popen2e(*cmd) do |_, stdout_and_stderr, wait_thr|
+        # :nocov:
         while (line = stdout_and_stderr.gets)
           message += line
           puts line
         end
         status = wait_thr.value.success?
+        # :nocov:
       end
 
       [status, message]
