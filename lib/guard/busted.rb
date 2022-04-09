@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
-require 'guard/compat/plugin'
+require 'guard/plugin'
+require 'guard/ui'
 
-require 'guard/busted/options'
-require 'guard/busted/runner'
-require 'guard/busted/utils'
+require_relative 'busted/options'
+require_relative 'busted/runner'
+require_relative 'busted/utils'
 
 module Guard
   # Plugin for 'guard' which starts 'busted' (lua unit testing framework) if a change is detected.
@@ -39,10 +40,13 @@ module Guard
     private
 
     def check_if_busted_exist
+      # :nocov:
       return unless which('busted').nil?
 
-      puts 'Busted not found. Use :cmd option or ' \
-           'install `busted` via `luarocks install busted --local`'
+      # :nocov:
+
+      UI.error 'Busted not found. Use :cmd option or ' \
+               'install `busted` via `luarocks install busted --local`'
     end
   end
 end

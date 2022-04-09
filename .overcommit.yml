@@ -1,0 +1,86 @@
+gemfile: '.overcommit_gems.rb'
+
+plugin_directory: '.git-hooks'
+
+quiet: false
+
+concurrency: '%{processors}'
+
+verify_signatures: true
+
+CommitMsg:
+  ALL:
+    requires_files: false
+    quiet: false
+
+  CapitalizedSubject:
+    enabled: false
+
+  EmptyMessage:
+    enabled: true
+    description: 'Check for empty commit message'
+
+  MessageFormat:
+    enabled: true
+    description: 'Check commit message matches expected pattern'
+    pattern: '\[(((#[0-9]+)(, (#[0-9]+))*)|(v[0-9]+(\.[0-9]+)*))\][ ](.+)(\n\n.+)?'
+    expected_pattern_message: '[#<Issue Id>|v<version>] <Commit Message Description>'
+    sample_message: '[#403] Fix a bug that crashes the system'
+
+  SingleLineSubject:
+    enabled: true
+    description: 'Check subject line'
+
+  TextWidth:
+    enabled: true
+    description: 'Check text width'
+    max_subject_width: 60
+    min_subject_width: 0
+    max_body_width: 72
+
+  TrailingPeriod:
+    enabled: true
+    description: 'Check for trailing periods in subject'
+
+PreCommit:
+  ALL:
+    problem_on_unmodified_line: report
+    requires_files: true
+    required: false
+    quiet: false
+
+  RuboCop:
+   enabled: true
+   on_warn: fail
+
+  AuthorEmail:
+    enabled: true
+    description: 'Check author email'
+    requires_files: false
+    required: true
+    pattern: '^[^@]+@.*$'
+
+  AuthorName:
+    enabled: true
+    description: 'Check for author name'
+    requires_files: false
+    required: true
+
+  BrokenSymlinks:
+    enabled: true
+    description: 'Check for broken symlinks'
+
+  CaseConflicts:
+    enabled: true
+    description: 'Check for case-insensitivity conflicts'
+
+  FileSize:
+    enabled: true
+    description: 'Check for oversized files'
+    size_limit_bytes: 1_000_000
+
+  ForbiddenBranches:
+    enabled: true
+    description: 'Check for commit to forbidden branch'
+    quiet: true
+    branch_patterns: ['master', 'develop', 'v*']

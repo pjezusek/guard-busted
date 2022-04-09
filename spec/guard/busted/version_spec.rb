@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe Guard::BustedVersion do
-  let(:version_class) { described_class }
+  let(:version_module) { described_class }
 
   it 'has a version number' do
-    expect(version_class::VERSION).not_to be nil
+    expect(version_module::VERSION).not_to be nil
   end
 end

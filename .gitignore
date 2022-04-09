@@ -1,3 +1,5 @@
 coverage
 .rspec_status
 pkg
+vendor
+.bundle
