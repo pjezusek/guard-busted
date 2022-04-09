@@ -23,5 +23,12 @@ RSpec.describe Guard::BustedUtils do
         expect(instance.which('some_not_existing_entry')).to be nil
       end
     end
+
+    context 'without existing executable and PATHEXT ENV' do
+      it 'returns nil' do
+        ENV['PATHEXT'] = ''
+        expect(instance.which('some_not_existing_entry')).to be nil
+      end
+    end
   end
 end
