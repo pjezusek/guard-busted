@@ -56,7 +56,7 @@ module Guard
 
     # Performs command and print stdout and stderr to the console
     #
-    # @param cmd [String] command to perform
+    # @param cmd [Array<String>] command to perform
     #
     # @return [Array<Boolean, String>]
     def perform_command(cmd)
