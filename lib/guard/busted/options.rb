@@ -5,9 +5,9 @@ module Guard
     DEFAULTS = {
       run_all_on_start: false,
       cmd: 'busted',
-      cmd_options: ['-o', 'utfTerminal'],
+      cmd_options: ['-o', 'utfTerminal', '--Xoutput', '--color'],
       cmd_all: 'busted',
-      cmd_all_options: ['-o', 'utfTerminal']
+      cmd_all_options: ['-o', 'utfTerminal', '--Xoutput', '--color']
     }.freeze
   end
 end

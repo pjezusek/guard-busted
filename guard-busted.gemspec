@@ -23,19 +23,7 @@ Gem::Specification.new do |spec|
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
 
-  spec.test_files    = spec.files.grep(%r{^spec/})
   spec.require_paths = ['lib']
 
   spec.add_dependency 'guard', '~> 2.18'
-
-  spec.add_development_dependency 'amazing_print'
-  spec.add_development_dependency 'guard'
-  spec.add_development_dependency 'guard-rspec'
-  spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'rubocop'
-  spec.add_development_dependency 'rubocop-rake'
-  spec.add_development_dependency 'rubocop-rspec'
-  spec.add_development_dependency 'simplecov'
-  spec.add_development_dependency 'simplecov-cobertura'
 end
