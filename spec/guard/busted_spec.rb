@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 RSpec.describe Guard::Busted do
-  it 'has a version number' do
-    expect(Guard::BustedVersion::VERSION).not_to be nil
-  end
-
   before do
     Guard::Plugin.class_eval do
       def initialize(options = {}); end
     end
+  end
+
+  it 'has a version number' do
+    expect(Guard::BustedVersion::VERSION).not_to be_nil
   end
 
   it 'allows to overrite options on #new' do

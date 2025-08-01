@@ -3,11 +3,7 @@
 require 'guard/compat/test/helper'
 
 RSpec.describe Guard::BustedRunner do
-  before do
-    # disable notification from busted
-    allow_any_instance_of(Guard::BustedNotifier).to receive(:notify).and_return(true)
-  end
-
+  let(:notifier) { instance_double(Guard::BustedNotifier) }
   let(:runner) do
     options = {
       cmd: 'some_command',
@@ -15,21 +11,30 @@ RSpec.describe Guard::BustedRunner do
       cmd_all: 'some_command_all',
       cmd_all_options: ['--some_all_option_1', 'some_value_1', '--some_all_option_2']
     }
-    Guard::BustedRunner.new(options)
+    described_class.new(options)
+  end
+
+  before do
+    # disable notification from busted
+    allow(Guard::BustedNotifier).to receive(:new).and_return(notifier)
+    allow(notifier).to receive(:notify).and_return(true)
   end
 
   describe '.new' do
-    it 'extracts data from options' do
-      expect(
-        [runner.cmd, runner.cmd_options, runner.cmd_all, runner.cmd_all_options]
-      ).to eq(
-        [
-          'some_command',
-          ['--some_option_1', 'some_value_1', '--some_option_2'],
-          'some_command_all',
-          ['--some_all_option_1', 'some_value_1', '--some_all_option_2']
-        ]
-      )
+    it 'extracts cmd from options' do
+      expect(runner.cmd).to eq('some_command')
+    end
+
+    it 'extracts cmd_options from options' do
+      expect(runner.cmd_options).to eq(['--some_option_1', 'some_value_1', '--some_option_2'])
+    end
+
+    it 'extracts cmd_all from options' do
+      expect(runner.cmd_all).to eq('some_command_all')
+    end
+
+    it 'extracts cmd_all_options from options' do
+      expect(runner.cmd_all_options).to eq(['--some_all_option_1', 'some_value_1', '--some_all_option_2'])
     end
   end
 
@@ -39,8 +44,8 @@ RSpec.describe Guard::BustedRunner do
         allow(runner).to receive(:perform_command).and_return([false, 'some_message'])
       end
 
-      it 'should throw :task_has_failed' do
-        expect { runner.run_all }.to raise_error
+      it 'throws :task_has_failed' do
+        expect { runner.run_all }.to raise_error(StandardError)
       end
     end
 
@@ -59,20 +64,21 @@ RSpec.describe Guard::BustedRunner do
   end
 
   describe '#run' do
-    context 'when the system command ends with an error' do
-      it 'when ther is no test files to run' do
+    context 'when there are no test files to run' do
+      it 'does not perform command' do
         allow(runner).to receive(:perform_command).and_return([false, 'some_message'])
         runner.run ['path']
         expect(runner).not_to have_received(:perform_command)
       end
     end
-    context 'when the system command ends with an error' do
+
+    context 'when the system command fails' do
       before do
         allow(runner).to receive(:perform_command).and_return([false, 'some_message'])
       end
 
       it 'runs a test command for the given paths' do
-        expect { runner.run ['spec/fixtures/some_file'] }.to raise_error
+        expect { runner.run ['spec/fixtures/some_file'] }.to raise_error(StandardError)
       end
     end
 

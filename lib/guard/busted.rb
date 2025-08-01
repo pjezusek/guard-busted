@@ -11,6 +11,7 @@ module Guard
   # Plugin for 'guard' which starts 'busted' (lua unit testing framework) if a change is detected.
   class Busted < Plugin
     include BustedUtils
+
     attr_reader :options, :runner
 
     # Initializes a Guard plugin.
