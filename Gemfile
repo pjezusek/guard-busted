@@ -4,7 +4,6 @@ source 'https://rubygems.org'
 gemspec
 
 group :development do
-  gem 'amazing_print'
   gem 'guard'
   gem 'guard-rspec'
 end
@@ -17,6 +16,7 @@ group :test do
 end
 
 group :development, :test do
+  gem 'amazing_print'
   gem 'rubocop'
   gem 'rubocop-rake'
   gem 'rubocop-rspec'
