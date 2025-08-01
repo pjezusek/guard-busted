@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    guard-busted (1.0.1)
+    guard-busted (1.0.2)
       guard (~> 2.18)
 
 GEM
