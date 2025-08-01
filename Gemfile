@@ -3,13 +3,21 @@
 source 'https://rubygems.org'
 gemspec
 
-gem 'amazing_print'
-gem 'guard'
-gem 'guard-rspec'
-gem 'rake'
-gem 'rspec'
-gem 'rubocop'
-gem 'rubocop-rake'
-gem 'rubocop-rspec'
-gem 'simplecov'
-gem 'simplecov-cobertura'
+group :development do
+  gem 'amazing_print'
+  gem 'guard'
+  gem 'guard-rspec'
+end
+
+group :test do
+  gem 'rake'
+  gem 'rspec'
+  gem 'simplecov'
+  gem 'simplecov-cobertura'
+end
+
+group :development, :test do
+  gem 'rubocop'
+  gem 'rubocop-rake'
+  gem 'rubocop-rspec'
+end
