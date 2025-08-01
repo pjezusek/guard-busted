@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.0.2
+
+* Update gems in Gemfile.lock
+
+## v1.0.1
+
+* Update rubygems workflows
+* Move development gems to Gemfile
+* Force colors for STDOUT from busted
+* Update rubocop rules
+
 ## v0.1.2
 
 * Fixed Guardfile
