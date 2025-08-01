@@ -1,6 +1,14 @@
 # Changelog
 
-## v1.0.2
+## v2.0.0
+
+* Update rubocop rules and fix warnings from rubocop
+* Remove groups from Gemfile as all gems are needed in test and dev environments
+* Remove overcommit from project
+* Drop support for Ruby < 3.1
+* Update github workflows to support only Ruby >= 3.1
+
+## v1.0.2 (Not Released)
 
 * Update gems in Gemfile.lock
 
