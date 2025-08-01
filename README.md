@@ -27,21 +27,27 @@ Just type `guard init busted` in the root of your project.
 This command initializes the Guard file.
 
 The provided guard template checks all files with `.lua` extension and starts the corresponding test file.
-It searches test files in `spec` directory with the pattern `spec/<relative_path_to_file>/<file_name>_spec.lua`.
+It searches for test files in the `spec` directory with the pattern `spec/<relative_path_to_file>/<file_name>_spec.lua`.
 
 _EXAMPLE:_<br />
-There is some file in the project `some_dir/some_file.lua`.
-After some change on this file the guard-busted gem will try to perform tests located in: `spec/some_dir/some_file_spec.lua`.
+There is a file in the project `some_dir/some_file.lua`.
+After making changes to this file, the guard-busted gem will try to run tests located in: `spec/some_dir/some_file_spec.lua`.
 
 _WARNING!:_<br />
-Keep in your mind that it treats `src` dir in the special way.
+Keep in mind that it treats the `src` directory in a special way.
 It just does not include `src` in the mentioned pattern.
 
 The gem also supports desktop notifications.
 
+## Development
+
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `lib/guard/busted/version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
 ## Contributing
 
-Don't hesitate to open an issue or make a pull request.
+Bug reports and pull requests are welcome on GitHub at https://github.com/pjezusek/guard-busted.
 
 ## License
 
